@@ -15,9 +15,9 @@ for length in range (3, 13):
     print('\n')
     print("Random ", end = "")
     print(2 ** length, end = "-bit key: ")
-    test_length = int(math.log(2 ** (2 ** length), 16))
+    str_length = int((2 ** length) / 4)
     # Random hex in range 0x10...0 -> 0xF...F
-    rand_suffix = hex(randint(16 ** (test_length - 1), 16 ** test_length - 1))
+    rand_suffix = hex(randint(16 ** (str_length - 1), 16 ** str_length - 1))
     # Random symbol in range 0x0 -> 0xF
     rand_prefix = hex(randint(0, 15))
     # Merging to get key in range 0x0...0 -> 0xF...F
@@ -28,9 +28,9 @@ for length in range (3, 13):
 
     # Part 3. Brute forcing hex values to find a match to rand_hex_key 
     start_time = datetime.now()
-    for runner in range (16 ** (test_length - 1), 16 ** test_length):
+    for runner in range (16 ** (str_length - 1), 16 ** str_length):
         if hex(runner) == rand_hex_key:
             print("Execution time: ", end = "")
             print((datetime.now() - start_time).microseconds / 1000 + (datetime.now() - start_time).seconds * 1000, end = "ms")
-    if test_length == 8:
+    if str_length == 8:
         print('\n')

@@ -1,3 +1,4 @@
+import math
 from random import randint
 from datetime import datetime
 
@@ -9,11 +10,12 @@ for length in range (3, 13):
     print('\n')
     
 # Testing lengths are 3, 4, 5, 6, 7, 8 for Part 2 & 3 
-for test_length in range (3, 9):
+for length in range (3, 13):
     # Part 2. Generating & printing random hex value of given length
     print('\n')
-    print("Random key of length ", end = "")
-    print(test_length, end = ": ")
+    print("Random ", end = "")
+    print(2 ** length, end = "-bit key: ")
+    test_length = int(math.log(2 ** (2 ** length), 16))
     # Random hex in range 0x10...0 -> 0xF...F
     rand_suffix = hex(randint(16 ** (test_length - 1), 16 ** test_length - 1))
     # Random symbol in range 0x0 -> 0xF

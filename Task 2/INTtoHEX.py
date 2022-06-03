@@ -1,4 +1,4 @@
-# converting decimal remainer to hex digit 
+# converting decimal remainder to hex digit 
 def decToHex (dec_value):
     if (dec_value > 9): return chr(55 + dec_value)
     return  chr(48 + dec_value)

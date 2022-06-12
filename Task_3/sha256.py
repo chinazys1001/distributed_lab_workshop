@@ -113,7 +113,7 @@ def getMessageBlocks(binary_string):
     binary_length = bin(len(binary_string)).lstrip("0b")
     
     # padding
-    bits_to_pad = 512 - len(binary_message + separator + binary_length) % 512
+    bits_to_pad = 512 - len(binary_string + separator + binary_length) % 512
     res_string = binary_string + separator + '0' * bits_to_pad + binary_length
     
     # splitting into blocks
@@ -172,24 +172,30 @@ def getHashValue(compressed_blocks):
         res_hex_string += format(int(compressed_blocks[i], 2), '08x')
 
     return res_hex_string
+
+# main func
+def getSHA256(input_value):
+    binary_message = getBinaryMessage(input_value)
+    #print("Message in binary:\n", binary_message)
+
+    message_blocks = getMessageBlocks(binary_message)
+    #print("512-bit message blocks:\n", message_blocks)
+
+    compressed_blocks = getCompressedBlocks(message_blocks)
+    #print("Compressed blocks:\n", compressed_blocks)
+
+    hash_value = getHashValue(compressed_blocks)
     
+    return hash_value
+
 
 # driver code:
 
 constants = getConstants()
 # print("Constants:\n", constants)
 
-print("Value to be hashed: ", end = "")
-input_value = input()
+if __name__ == "__main__":
+    print("Value to be hashed: ", end = "")
+    input_value = input()
 
-binary_message = getBinaryMessage(input_value)
-# print("Message in binary:\n", binary_message)
-
-message_blocks = getMessageBlocks(binary_message)
-# print("512-bit message blocks:\n", message_blocks)
-
-compressed_blocks = getCompressedBlocks(message_blocks)
-# print("Compressed blocks:\n", compressed_blocks)
-
-hash_value = getHashValue(compressed_blocks)
-print("Hash value:", hash_value)
+    print("Hash value:", getSHA256(input_value))

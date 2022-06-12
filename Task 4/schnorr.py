@@ -48,4 +48,4 @@ key = key.lower()
 if keyIsValid(key) == False:
     print("The value contains forbidden character")
 if keyIsValid(key) == True:
-    print("Cipher:", getCipher(message, key))
+    print("Encrypted value:", getCipher(message, key))
